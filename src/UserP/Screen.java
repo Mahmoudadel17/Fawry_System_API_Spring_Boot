@@ -30,7 +30,7 @@ public class Screen {
 	        System.out.println("|           1- Add Service.                     |");
 	        System.out.println("|           2- Add discounts.                   |");
 	        System.out.println("|           3- list all refund requests.        |");
-	        System.out.println("|           4- Exit.             |");
+	        System.out.println("|           4- Exit.                            |");
 	        System.out.println("|_______________________________________________|\n");
 	    }
 	 
@@ -67,7 +67,7 @@ public class Screen {
 			}
 			
 			if(Select_user_or_admin==1) {
-				boolean c1=true;
+				boolean c1=true;User user=null;
 				while(c1) {
 					UserHomeScreen();
 					int Choice;
@@ -88,9 +88,9 @@ public class Screen {
 
 					}
 					if( Choice==1) {
-						FUCTL.Login_user();
+						user = FUCTL.Login_user();
 					}else if( Choice==2) {
-						FUCTL.Sin_Up();
+						user = FUCTL.Sin_Up();
 					}
 					else if( Choice==3) {
 						// Search 
@@ -102,7 +102,7 @@ public class Screen {
 						// ask refund
 					}
 					else if( Choice==6) {
-						// add funds
+							FUCTL.Add_Funds_to_Wallet(user);
 					}
 					else if( Choice==7) {
 						// discount

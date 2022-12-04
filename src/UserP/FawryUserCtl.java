@@ -10,7 +10,7 @@ public class FawryUserCtl {
 		users = new All_Users();
 	}
 	
-	public boolean Login_user() {
+	public User Login_user() {
 		 while (true){
 	            Scanner s = new Scanner(System.in);
 	            System.out.print("Enter your Email: ");
@@ -19,17 +19,29 @@ public class FawryUserCtl {
 	            String password = s.nextLine();
 
 	            User NewUser = All_Users.Search_About_User(email);
-	            if (NewUser==null){Sin_Up();System.out.print("Email not found, "); return false;}
+	            
+	            if (NewUser==null)
+	            {
+	            	System.out.print("Email not found, ");
+	            	return Sin_Up();
+	                
+	             }
 	            else if (Objects.equals(NewUser.getPassword(), password)){
 	                System.out.println("hello "+NewUser.getUserName());
-	                return true;
-	            }else {System.out.println("password incorrect--");return false;}
-
+	                return NewUser;
+	            }
+	            else {
+	            	System.out.println("password incorrect--");
+	            	break;
+	            
+	            }
+	            
 
 	        }
+		return null;
 	}
 	
-	public void Sin_Up() {
+	public User Sin_Up() {
 		  boolean t = true;
           while (t){
               System.out.println("Please Sign up");
@@ -46,7 +58,7 @@ public class FawryUserCtl {
 
               if (check==null){
                  users.Add_user(NewUser);
-                  t = false;
+                 return NewUser;
               }
               else {
                   System.out.print("this email already signup, Login!!");
@@ -54,6 +66,94 @@ public class FawryUserCtl {
               }
 
           }
+          System.out.println("error");
+		return null;
 	}
+	
+	public void Search_About_Service() {
+		 Scanner s = new Scanner(System.in);
+		 System.out.print("Enter your Name of Service: ");
+         String NameService = s.nextLine();
+         // Search
+	}
+	public void getCredit_Card_Information(User user) {
+		Scanner s = new Scanner(System.in);
+		 System.out.print("Enter Cardholder_name: ");
+        String Cardholder_name = s.nextLine();
+        System.out.print("Enter Card Number: ");
+        String Card_number = s.nextLine();
+        System.out.print("Enter Card Expiration date  : ");
+        String Expiration_date = s.nextLine();
+        System.out.print("Enter Card CVV: ");
+        String CVV = s.nextLine();
+        
+        Credit_Card card = new Credit_Card(Cardholder_name,Card_number,Expiration_date,CVV);
+        user.setCreditCard(card);
+	}
+	
+	public void Add_Funds_to_Wallet(User user) {
+		if(user==null) {
+			System.out.println("Please Login");
+		}
+		else {
+			 Scanner s = new Scanner(System.in);
+			 long amount;
+				while (true) {
+				    try {
+				       
+				        System.out.print("Enter Amount You Need To Add it into Wallet: ");
+				        String am = s.nextLine();
+				        amount = Long.parseLong(am);
+				        break;
+				    } catch (NumberFormatException e) {
+				        System.out.println("invalid input " + e.getMessage() + "\n");
+				    }
+				}
+				Credit_Card card = user.getCreditCard();
+				if(card==null) {
+					getCredit_Card_Information(user);
+					card = user.getCreditCard();
+				}
+				
+				if(card.getbalance()>=amount) {
+					card.use_credit_money(amount);
+					user.getWallet().add_to_wallet(amount);
+					System.out.println("money : "+user.getWallet().wallet_money());
+					
+				}
+				else {
+					System.out.println("Sorry this Amount Not available in your account, your balance is : "+card.getbalance());
+				}
+				
+				
+		}
+		
+			
+		 
+	
+			
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
