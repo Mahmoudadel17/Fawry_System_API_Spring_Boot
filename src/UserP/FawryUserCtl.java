@@ -1,15 +1,15 @@
 package UserP;
 
+import CreatorServices.CreateService;
+import CreatorServices.DialogServices;
+import Services.Services;
+
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class FawryUserCtl {
-	private All_Users  users;
-	
-	public FawryUserCtl() {
-		users = new All_Users();
-	}
-	
+
 	public User Login_user() {
 		 while (true){
 	            Scanner s = new Scanner(System.in);
@@ -23,7 +23,7 @@ public class FawryUserCtl {
 	            if (NewUser==null)
 	            {
 	            	System.out.print("Email not found, ");
-	            	return Sin_Up();
+	            	return Sign_Up();
 	                
 	             }
 	            else if (Objects.equals(NewUser.getPassword(), password)){
@@ -41,7 +41,7 @@ public class FawryUserCtl {
 		return null;
 	}
 	
-	public User Sin_Up() {
+	public User Sign_Up() {
 		  boolean t = true;
           while (t){
               System.out.println("Please Sign up");
@@ -53,11 +53,12 @@ public class FawryUserCtl {
               String email = s.nextLine();
               System.out.print("Enter your password: ");
               String password = s.nextLine();
-              User NewUser = new User(Name,email,password);
-              User check = users.Search_About_User(email);
+             
+              User check = All_Users.Search_About_User(email);
 
               if (check==null){
-                 users.Add_user(NewUser);
+            	 User NewUser = new User(Name,email,password);
+                 All_Users.Add_user(NewUser);
                  return NewUser;
               }
               else {
@@ -70,11 +71,11 @@ public class FawryUserCtl {
 		return null;
 	}
 	
-	public void Search_About_Service() {
+	public LinkedList<Services> Search_About_Service() {
 		 Scanner s = new Scanner(System.in);
 		 System.out.print("Enter your Name of Service: ");
          String NameService = s.nextLine();
-         // Search
+         return SearchingList.Search(NameService);
 	}
 	public void getCredit_Card_Information(User user) {
 		Scanner s = new Scanner(System.in);
@@ -135,25 +136,33 @@ public class FawryUserCtl {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void Pay(User user,Context context,Services service) {
+		if (user == null) {
+			System.out.println("Please Login");
+		} else {
+			System.out.println("Enter Amount of Money You Want to Pay: ");
+			Scanner homeScan = new Scanner(System.in);
+			long amount;
+			while (true) {
+				try {
+					String s = homeScan.nextLine();
+					amount = Integer.parseInt(s);
+					break;
+				} catch (NumberFormatException e) {
+					System.out.println("invalid input " + e.getMessage() + "\n");
+				}
+			}
+			service.setAmount(amount);
+			context.pay(user, service);
+			if (! (context.Current instanceof Cache_Payment )){
+				  user.AddService(service);
+			}
+
+
+		}
+
+
+	}
 	
 
 }

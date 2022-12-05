@@ -1,11 +1,16 @@
 package UserP;
 
+import Services.Services;
+
+import java.util.LinkedList;
+
 public class User {
 	private String Name;
 	private String Email;
 	private String Password;
 	private Wallet wallet ;
     private Credit_Card creditCard;
+	private static final LinkedList<Services> AllServicesPay = new LinkedList<>();
 	
 	
 	
@@ -30,6 +35,8 @@ public class User {
 	public Wallet getWallet() {
 		return this.wallet;
 	}
-	
+	public void AddService(Services service){
+		AllServicesPay.add(service);
+	}
 
 }
