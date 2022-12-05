@@ -1,31 +1,55 @@
 package UserP;
 
+import AdminP.FawryAdminCtl;
+import AdminP.Request;
 import CreatorServices.CreateService;
 import CreatorServices.DialogServices;
+import Discount.OverallDiscounts;
 import Services.Services;
 
-import java.security.PublicKey;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Screen {
 	public static  FawryUserCtl FUCTL = new FawryUserCtl();
+	public static FawryAdminCtl FACTL = new FawryAdminCtl();
+	public static void FirstHomeScreen(){
+		System.out.println("\n ________________ First Home Screen  _________________");
+		System.out.println("                                                ");
+		System.out.println(" _______________________________________________");
+		System.out.println("|                                               |");
+		System.out.println("|           1- User.                            |");
+		System.out.println("|           2- Admin.                           |");
+		System.out.println("|           3- Exit.                            |");
+		System.out.println(" _______________________________________________");
+	}
 
-	
+	public static void LoginUserHomeScreen(){
+		System.out.println("\n ________________ User Home Screen  _________________");
+		System.out.println("                                                ");
+		System.out.println(" welcome to, Fawry System Services              ");
+		System.out.println(" _______________________________________________");
+		System.out.println("|                                               |");
+		System.out.println("|           1- Login.                           |");
+		System.out.println("|           2- Sign Up.                         |");
+		System.out.println("|           3- Exit.                            |");
+		System.out.println(" _______________________________________________");
+	}
+
+
 	 public static void UserHomeScreen(){
 	        System.out.println("\n ________________ User Home Screen  _________________");
 	        System.out.println("                                                ");
 	        System.out.println(" welcome to, Fawry System Services              ");
 	        System.out.println(" _______________________________________________");
 	        System.out.println("|                                               |");
-	        System.out.println("|           1- Login.                           |");
-	        System.out.println("|           2- Sign Up.                         |");
-	        System.out.println("|           3- Search for Service.              |");
-	        System.out.println("|           4- Pay.                             |");
-	        System.out.println("|           5- Ask for a Refund.                |");
-	        System.out.println("|           6- Add Funds to Wallet.             |");
-	        System.out.println("|           7- check any discount.              |");
-	        System.out.println("|           8- Exit.                            |");
+	        System.out.println("|           1- Search for Service.              |");
+	        System.out.println("|           2- Pay.                             |");
+	        System.out.println("|           3- Ask for a Refund.                |");
+		    System.out.println("|           4- show refund requests.            |");
+	        System.out.println("|           5- Add Funds to Wallet.             |");
+	        System.out.println("|           6- check any discount.              |");
+	        System.out.println("|           7- Exit.                            |");
 	        System.out.println("|_______________________________________________|\n");
 	    }
 	 public static void AdminHomeScreen(){
@@ -49,6 +73,18 @@ public class Screen {
 		System.out.println("|           4- Donations.                       |");
 		System.out.println("|_______________________________________________|\n");
 	}
+	public static void DiscountServicesScreen(long[] arr){
+
+		long dis1=arr[0] + OverallDiscounts.getDiscount(),dis2=arr[0] + OverallDiscounts.getDiscount(),dis3=arr[0] + OverallDiscounts.getDiscount(),dis4=arr[0] + OverallDiscounts.getDiscount();
+		System.out.println("\n ________________  Discount Services Screen  _________________");
+		System.out.println("|                                                              |");
+		System.out.println("|           1- Mobile recharge services with "+dis1+"% Discount");
+		System.out.println("|           2- Internet Payment services with "+dis2+"% Discount");
+		System.out.println("|           3- Landline services with "+dis3+"% Discount");
+		System.out.println("|           4- Donations with "+dis4+"% Discount");
+		System.out.println("|_______________________________________________________________|\n");
+	}
+
 	public static void MobileServicesScreen(){
 		System.out.println("\n ________________ Mobile Services Screen  _________________");
 		System.out.println("                                                ");
@@ -122,6 +158,26 @@ public class Screen {
 		System.out.println(" _______________________________________________");
 	}
 
+	public static void displayRequestsScreen(LinkedList<Request> AllRefundRequsets){
+		if (AllRefundRequsets.size()==0){
+			System.out.println("No Refund Requests founded");
+		}else {
+			System.out.println("\n ________________ display Requests Screen  _________________");
+			System.out.println("                                                ");
+			for (int i = 0;i<AllRefundRequsets.size();i++){
+				System.out.println(" _______________________________________________");
+				System.out.println("|      Request ID:   "+(i+1));
+				System.out.println("|      Service Name: "+AllRefundRequsets.get(i).getService().getName());
+				System.out.println("|      Amount:       "+AllRefundRequsets.get(i).getService().getAmount());
+				System.out.println("|      State:        "+AllRefundRequsets.get(i).getState());
+				System.out.println("|_______________________________________________|\n");
+				System.out.println(" ");
+			}
+		}
+
+
+	}
+
 
 
 
@@ -156,44 +212,36 @@ public class Screen {
 		while(c) {
 			 // 
 			 int Select_user_or_admin;
-			while (true) {
-			    try {
-			        System.out.println("1- User.");
-			        System.out.println("2- Admin.");
-			        System.out.println("3- Exit.");
-			        System.out.print("choice: ");
-			        String s = homeScan.nextLine();
-			        Select_user_or_admin = Integer.parseInt(s);
-			        if (Select_user_or_admin != 1 && Select_user_or_admin != 2 && Select_user_or_admin != 3) {
-			            System.out.println("invalid input \n");
-			            continue;
-			        }
-			        break;
-			    } catch (NumberFormatException e) {
-			        System.out.println("invalid input " + e.getMessage() + "\n");
-			    }
-
-			}
-			
+			 FirstHomeScreen();
+			 Select_user_or_admin = cinput(1,3);
 			if(Select_user_or_admin==1) {
 				boolean c1=true;User user=null;
+
 				while(c1) {
+					while (user==null){
+						LoginUserHomeScreen();
+						int ChoiceLOG = cinput(1,3);
+						if( ChoiceLOG==1) {
+							user = FUCTL.Login_user();
+						}else if( ChoiceLOG==2) {
+							user = FUCTL.Sign_Up();
+						}
+						else {
+							System.out.println("Thanks-_-");
+							c1=false;
+						}
+					}
 					UserHomeScreen();
-					int Choice = cinput(1,8);
+					int Choice = cinput(1,7);
 
 					if( Choice==1) {
-						user = FUCTL.Login_user();
-					}else if( Choice==2) {
-						user = FUCTL.Sign_Up();
-					}
-					else if( Choice==3) {
 						// Search
 						LinkedList<Services> matchServices;
 						matchServices = FUCTL.Search_About_Service();
 						displayServicesScreen(matchServices);
 
 					}
-					else if( Choice==4) {
+					else if( Choice==2) {
 						// pay
 						ServicesScreen();
 						// select Service
@@ -238,15 +286,22 @@ public class Screen {
 						FUCTL.Pay(user,Payment_Way,service);
 
 					}
-					else if( Choice==5) {
+					else if( Choice==3) {
 						// ask refund
+						FUCTL.MakeRefund(user);
 					}
-					else if( Choice==6) {
+					else if(Choice==4){
+						// list request
+						displayRequestsScreen(FUCTL.getAllRefundRequsets(user));
+					}
+					else if( Choice==5) {
 							FUCTL.Add_Funds_to_Wallet(user);
 					}
-					else if( Choice==7) {
+					else if( Choice==6) {
 						// discount
-					}else if( Choice==8) {
+						DiscountServicesScreen(FUCTL.CheckDiscount());
+					}else if( Choice==7) {
+						user=null;
 						System.out.println("Thanks-_-");
 						c1=false;
 					}
@@ -283,8 +338,10 @@ public class Screen {
 					}
 					if( Choice1==1) {
 						// add discount
+						FACTL.AddDiscount();
 					}else if( Choice1==2) {
 						// list refunds
+						FACTL.listrefund();
 					}
 					else if( Choice1==3) {
 						System.out.println("Thanks-_-");

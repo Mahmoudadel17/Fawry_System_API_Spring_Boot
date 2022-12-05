@@ -4,7 +4,6 @@ package UserP;
 
 import java.util.LinkedList;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class All_Users {
     private static final LinkedList<User> Alluser = new LinkedList<>();

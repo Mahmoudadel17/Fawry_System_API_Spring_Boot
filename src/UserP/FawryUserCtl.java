@@ -1,7 +1,9 @@
 package UserP;
 
-import CreatorServices.CreateService;
-import CreatorServices.DialogServices;
+import AdminP.FawryAdminCtl;
+import AdminP.Request;
+import Discount.OverallDiscounts;
+import Discount.SpecificDiscount;
 import Services.Services;
 
 import java.util.LinkedList;
@@ -22,8 +24,8 @@ public class FawryUserCtl {
 	            
 	            if (NewUser==null)
 	            {
-	            	System.out.print("Email not found, ");
-	            	return Sign_Up();
+	            	System.out.println("Email not found, ");
+	            	return null;
 	                
 	             }
 	            else if (Objects.equals(NewUser.getPassword(), password)){
@@ -32,13 +34,12 @@ public class FawryUserCtl {
 	            }
 	            else {
 	            	System.out.println("password incorrect--");
-	            	break;
-	            
+
 	            }
 	            
 
 	        }
-		return null;
+
 	}
 	
 	public User Sign_Up() {
@@ -77,9 +78,12 @@ public class FawryUserCtl {
          String NameService = s.nextLine();
          return SearchingList.Search(NameService);
 	}
+
 	public void getCredit_Card_Information(User user) {
 		Scanner s = new Scanner(System.in);
-		 System.out.print("Enter Cardholder_name: ");
+		System.out.println("----- Credit Card Information-----");
+		System.out.println("----------------------------------");
+		System.out.print("Enter Cardholder_name: ");
         String Cardholder_name = s.nextLine();
         System.out.print("Enter Card Number: ");
         String Card_number = s.nextLine();
@@ -119,7 +123,7 @@ public class FawryUserCtl {
 				if(card.getbalance()>=amount) {
 					card.use_credit_money(amount);
 					user.getWallet().add_to_wallet(amount);
-					System.out.println("money : "+user.getWallet().wallet_money());
+					System.out.println(" Wallet money : "+user.getWallet().wallet_money());
 					
 				}
 				else {
@@ -134,14 +138,59 @@ public class FawryUserCtl {
 	
 			
 	}
-	
+
+	public void MakeRefund(User user){
+		if(user.getAllServicesPay().size()!=0) {
+			for (int i = 0;i<user.getAllServicesPay().size();i++){
+				System.out.println(" _______________________________________________");
+				System.out.println("|      Service ID:   "+(i+1));
+				System.out.println("|      Service Name: "+user.getAllServicesPay().get(i).getName());
+				System.out.println("|      Amount:       "+user.getAllServicesPay().get(i).getAmount());
+				System.out.println("|_______________________________________________|\n");
+			}
+			
+			int id;
+			Scanner homeScan = new Scanner(System.in);
+			while (true) {
+				try {
+
+					System.out.print("Enter Service id you want to refund: ");
+					String s = homeScan.nextLine();
+					id = Integer.parseInt(s);
+					if ( id<1 ||  id>user.getAllServicesPay().size()) {
+						System.out.println("invalid input \n");
+						continue;
+					}
+					break;
+				} catch (NumberFormatException e) {
+					System.out.println("invalid input " + e.getMessage() + "\n");
+				}
+
+			}
+			Request request = new Request(user.getAllServicesPay().get(id-1),user,id-1);
+			FawryAdminCtl.AddRequestToList(request);
+			user.AddRequest(request);
+		}
+		else {
+			System.out.println("You have not used any service :)");
+		}
+
+	}
+
+	public LinkedList<Request> getAllRefundRequsets(User user){
+		return user.getAllRefundRequsets();
+	}
 	
 	public void Pay(User user,Context context,Services service) {
 		if (user == null) {
 			System.out.println("Please Login");
 		} else {
-			System.out.println("Enter Amount of Money You Want to Pay: ");
 			Scanner homeScan = new Scanner(System.in);
+			System.out.print("Enter Your Mobile Number: ");
+			String MOBNumber = homeScan.nextLine();
+			user.setMobileNumber(MOBNumber);
+			System.out.print("Enter Amount of Money You Want to Pay: ");
+
 			long amount;
 			while (true) {
 				try {
@@ -152,17 +201,46 @@ public class FawryUserCtl {
 					System.out.println("invalid input " + e.getMessage() + "\n");
 				}
 			}
+			if (SpecificDiscount.CheckDiscount(service)){
+				service = new SpecificDiscount(service);
+			}
+			if (OverallDiscounts.CheckDiscount(user)){
+				service = new OverallDiscounts(service);
+			}
+
 			service.setAmount(amount);
-			context.pay(user, service);
-			if (! (context.Current instanceof Cache_Payment )){
+			Credit_Card card = user.getCreditCard();
+			if(card==null) {
+				getCredit_Card_Information(user);
+			}
+
+			boolean payDone = context.pay(user, service);
+			if (!(context.Current instanceof Cache_Payment ) && payDone){
 				  user.AddService(service);
 			}
 
 
-		}
+		} 
 
 
 	}
-	
+
+	public long[] CheckDiscount(){
+
+		long[] arr={0,0,0,0};
+		if (Objects.equals(SpecificDiscount.getServicesNameDiscount(), "mobile recharge")){
+			arr[0]=SpecificDiscount.getDiscount();
+		}else if (Objects.equals(SpecificDiscount.getServicesNameDiscount(), "internet payment")){
+			arr[1]=SpecificDiscount.getDiscount();
+
+		}else if (Objects.equals(SpecificDiscount.getServicesNameDiscount(), "landline")){
+			arr[2]=SpecificDiscount.getDiscount();
+
+		}else if (Objects.equals(SpecificDiscount.getServicesNameDiscount(), "donations")){
+			arr[3]=SpecificDiscount.getDiscount();
+
+		}
+		return arr;
+	}
 
 }

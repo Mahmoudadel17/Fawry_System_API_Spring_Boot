@@ -1,7 +1,5 @@
 package CreatorServices;
 
-import Services.Services;
-
 public class CreateService {
 
     static DialogServices dialogServices;

@@ -4,9 +4,18 @@ import Services.Services;
 
 public class Wallet_Payment implements Payment {
     @Override
-    public void pay(User user, Services service) {
+    public boolean pay(User user, Services service) {
 
-        System.out.println("Wallet Payment");
-        user.getWallet().use_wallet_money(service.getAmount());
+
+        if (service.getAmount()<=user.getWallet().wallet_money()){
+            user.getWallet().use_wallet_money(service.getAmount());
+            System.out.println("Wallet Payment Done "+service.getAmount());
+            return true;
+        }
+        else {
+            System.out.println("Your wallet balance is not enough");
+            return false;
+        }
+
     }
 }
