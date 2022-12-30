@@ -1,5 +1,7 @@
 package refunds;
 
+import transactions.All_Transactions;
+import transactions.Refund_transaction;
 import user.User;
 
 import java.util.LinkedList;
@@ -8,50 +10,54 @@ public class FawryRefundsCtl {
     All_Refunds allRefunds = new All_Refunds();
 
     // user
-//    public void MakeRefund(User user){
-//        if(user.getAllServicesPay().size()!=0) {
-//            for (int i = 0;i<user.getAllServicesPay().size();i++){
-//                System.out.println(" _______________________________________________");
-//                System.out.println("|      Service ID:   "+(i+1));
-//                System.out.println("|      Service Name: "+user.getAllServicesPay().get(i).getName());
-//                System.out.println("|      Amount:       "+user.getAllServicesPay().get(i).getAmount());
-//                System.out.println("|_______________________________________________|\n");
-//            }
-//
-//            int id;
-//            Scanner homeScan = new Scanner(System.in);
-//            while (true) {
-//                try {
-//
-//                    System.out.print("Enter Service id you want to refund: ");
-//                    String s = homeScan.nextLine();
-//                    id = Integer.parseInt(s);
-//                    if ( id<1 ||  id>user.getAllServicesPay().size()) {
-//                        System.out.println("invalid input \n");
-//                        continue;
-//                    }
-//                    break;
-//                } catch (NumberFormatException e) {
-//                    System.out.println("invalid input " + e.getMessage() + "\n");
-//                }
-//
-//            }
-//            Request request = new Request(user.getAllServicesPay().get(id-1),user,id-1);
-//            AddRequestToList(request);
-//            user.AddRequest(request);
-//        }
-//        else {
-//            System.out.println("You have not used any service :)");
-//        }
-//
-//    }
+    public void MakeRefund(User user){
+        if(user.getAllServicesPay().size()!=0) {
+            for (int i = 0;i<user.getAllServicesPay().size();i++){
+                System.out.println(" _______________________________________________");
+                System.out.println("|      Service ID:   "+(i+1));
+                System.out.println("|      Service Name: "+user.getAllServicesPay().get(i).getName());
+                System.out.println("|      Amount:       "+user.getAllServicesPay().get(i).getAmount());
+                System.out.println("|_______________________________________________|\n");
+            }
+
+            int id;
+            Scanner homeScan = new Scanner(System.in);
+            while (true) {
+                try {
+
+                    System.out.print("Enter Service id you want to refund: ");
+                    String s = homeScan.nextLine();
+                    id = Integer.parseInt(s);
+                    if ( id<1 ||  id>user.getAllServicesPay().size()) {
+                        System.out.println("invalid input \n");
+                        continue;
+                    }
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("invalid input " + e.getMessage() + "\n");
+                }
+
+            }
+            Request request = new Request(user.getAllServicesPay().get(id-1),user,id-1);
+            AddRequestToList(request);
+            user.AddRequest(request);
+            // transaction
+            Refund_transaction refundTransaction = new Refund_transaction(user,request);
+            All_Transactions allTransactions = new All_Transactions();
+            allTransactions.Add_refund_transactions(refundTransaction);
+        }
+        else {
+            System.out.println("You have not used any service :)");
+        }
+
+    }
 
 
 
-//    public LinkedList<Request> getAllRefundRequsets(User user){
-//        return user.getAllRefundRequsets();
-//    }
-//
+    public LinkedList<Request> getAllRefundRequsets(User user){
+        return user.getAllRefundRequsets();
+    }
+
 
 
     // admin
@@ -87,7 +93,7 @@ public class FawryRefundsCtl {
             }
 
             if (choice==2){
-                t=false;
+                break;
             }
 
             if (allRefunds.getAllRequest().size()==0){
@@ -96,11 +102,11 @@ public class FawryRefundsCtl {
             }else {
                 for (int i = 0;i<allRefunds.getAllRequest().size();i++){
                     System.out.println(" _______________________________________________");
-//                    System.out.println("|      Request ID:   "+(i+1));
-//                    System.out.println("|      Service Name: "+allRefunds.getAllRequest().get(i).getService().getName());
-//                    System.out.println("|      Amount:       "+allRefunds.getAllRequest().get(i).getService().getAmount());
-//                    System.out.println("|      User name:    "+allRefunds.getAllRequest().get(i).getUser().getUserName());
-//                    System.out.println("|_______________________________________________|\n");
+                    System.out.println("|      Request ID:   "+(i+1));
+                    System.out.println("|      Service Name: "+allRefunds.getAllRequest().get(i).getService().getName());
+                    System.out.println("|      Amount:       "+allRefunds.getAllRequest().get(i).getService().getAmount());
+                    System.out.println("|      User name:    "+allRefunds.getAllRequest().get(i).getUser().getUserName());
+                    System.out.println("|_______________________________________________|\n");
                 }
                 int id;
                 while (true) {
@@ -148,9 +154,9 @@ public class FawryRefundsCtl {
                     allRefunds.getAllRequest().get(id-1).setState_Accepted();
                     Request request = allRefunds.getRemovedRequest(id-1);
                     // remove service from user pay service
-//                    request.getUser().RemoveService(request.getServicesId());
-//                    // add amount to user wallet
-//                    request.getUser().getWallet().add_to_wallet(request.getService().getAmount());
+                    request.getUser().RemoveService(request.getServicesId());
+                    // add amount to user wallet
+                    request.getUser().getWallet().add_to_wallet(request.getService().getAmount());
 
                 }
                 else{

@@ -1,6 +1,9 @@
 package payment;
 
 import Services.Service;
+import transactions.Add_to_wallet_transaction;
+import transactions.All_Transactions;
+import transactions.Payment_transaction;
 import user.User;
 import user.Credit_Card;
 import Discount.SpecificDiscount;
@@ -54,6 +57,10 @@ public class FawryPaymentCtl {
                 user.getWallet().add_to_wallet(amount);
                 System.out.println(" Wallet money : "+user.getWallet().wallet_money());
 
+                // transaction
+                Add_to_wallet_transaction addToWalletTransaction = new Add_to_wallet_transaction(user,amount);
+                All_Transactions allTransactions = new All_Transactions();
+                allTransactions.Add_addToWallet_transactions(addToWalletTransaction);
             }
             else {
                 System.out.println("Sorry this Amount Not available in your account, your balance is : "+card.getbalance());
@@ -66,7 +73,7 @@ public class FawryPaymentCtl {
 
 
 
-    public void Pay(User user, Context context, Service service) {
+    public void Pay(User user, Context context, Service service,int select) {
         if (user == null) {
             System.out.println("Please Login");
         } else {
@@ -98,14 +105,22 @@ public class FawryPaymentCtl {
 
             service.setAmount(amount);
             Credit_Card card = user.getCreditCard();
-            if(card==null && context.Current instanceof Credit_Card) {
+            if(card==null && select==1) {
                 getCredit_Card_Information(user);
             }
 
-           // boolean payDone = context.pay(user, service);
-//            if (!(context.Current instanceof Cache_Payment ) && payDone){
-//                user.AddService(service);
-//            }
+            boolean payDone = context.pay(user, service);
+            if (select!=3 && payDone){
+                user.AddService(service);
+
+            }
+            if(payDone){
+                // transaction
+                Payment_transaction paymentTransaction = new Payment_transaction(user,service);
+                All_Transactions allTransactions = new All_Transactions();
+                allTransactions.Add_payment_transactions(paymentTransaction);
+
+            }
 
 
         }

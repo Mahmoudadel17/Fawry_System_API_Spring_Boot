@@ -16,8 +16,8 @@ public class SpecificDiscount extends Discountes{
         {
             return false;
         }
-        String s = service.getName();
-        return s.contains(ServicesNameDiscount);
+        String s = service.getName().toLowerCase();
+        return s.contains(ServicesNameDiscount.toLowerCase());
 
     }
 
@@ -27,6 +27,7 @@ public class SpecificDiscount extends Discountes{
     public static  void setDiscount(int discoun){discount=discoun;}
     public static long getDiscount(){return discount;}
 
+    public void setAmount(long amount){super.setAmount(calcDiscout(amount));}
     protected long calcDiscout(long amount){
         return (long) (amount - ((discount/100.0)*amount));
     }

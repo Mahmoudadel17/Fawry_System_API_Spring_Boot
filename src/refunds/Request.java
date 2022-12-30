@@ -1,20 +1,21 @@
 package refunds;
 
 
+import Services.Service;
 import user.User;
 
 public class Request {
-//    private Services service;
+    private Service service;
     private int ServicesId;
     private User user;
     private String State="waiting";//( waiting , accepted , rejected) , every refund in start -> waiting
-//    public Request(Services service,User user,int id){
-//        this.service = service;
-//        this.user = user;
-//        this.ServicesId=id;
-//
-//    }
-    //public Services getService(){return service;}
+    public Request(Service service,User user,int id){
+        this.service = service;
+        this.user = user;
+        this.ServicesId=id;
+
+    }
+    public Service getService(){return service;}
     public User getUser(){return user;}
     public int getServicesId(){
         return ServicesId;

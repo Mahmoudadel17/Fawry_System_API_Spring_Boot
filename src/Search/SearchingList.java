@@ -13,7 +13,6 @@ public class SearchingList {
 
         ServicesList = new LinkedList<>();
         Create_Service createService = new Create_Service();
-        int i1=1,i2=2,i3=3,i4=4;
         DialogService dialogService;
         for (int j=1;j<=4;j++){
             dialogService = createService.CreateService(j);
@@ -27,8 +26,9 @@ public class SearchingList {
     public  LinkedList<Service> Search(String match) {
         GenerateListServices();
         LinkedList<Service> matchServices = new LinkedList<>();
+        match = match.toLowerCase();
         for (Service service : ServicesList) {
-            if (service.getName().contains(match)) {
+            if (service.getName().toLowerCase().contains(match)) {
                 matchServices.add(service);
             }
         }
