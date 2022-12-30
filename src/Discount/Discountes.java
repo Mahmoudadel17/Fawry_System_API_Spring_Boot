@@ -1,32 +1,18 @@
 package Discount;
 
-import Services.Services;
+import Services.Service;
 
-public class Discountes implements Services {
-    private Services service;
-   
-    Discountes(Services service){
+public class Discountes extends Service{
+    private Service service;
+
+    Discountes(Service service){
+        super(service.getName());
         this.service=service;
-    }
 
-    
-    @Override
-    public void setAmount(long amount) {
-        service.setAmount(amount);
-    }
-
-    @Override
-    public long getAmount() {
-        return service.getAmount();
     }
 
     @Override
     public boolean checkDelivary() {
         return service.checkDelivary();
-    }
-
-    @Override
-    public String getName() {
-        return service.getName();
     }
 }

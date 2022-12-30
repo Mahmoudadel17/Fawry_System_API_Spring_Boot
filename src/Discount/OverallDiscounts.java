@@ -1,43 +1,30 @@
 package Discount;
 
-import Services.Services;
-import UserP.User;
+import Services.Service;
+import user.User;
+
+import java.util.Objects;
 
 public class OverallDiscounts extends Discountes{
     private static long discount;
-    public OverallDiscounts(Services service) {
+    private static String ServicesNameDiscount="-1";
+    public OverallDiscounts(Service service) {
         super(service);
     }
-
-    public static boolean CheckDiscount(User user) {
+    public boolean CheckDiscount(User user) {
         return user.getAllServicesPay().size() == 0;
     }
-    
-    public static  void setDiscount(int discoun){discount=discoun;}
-    public static  long getDiscount(){return discount;}
+
+    public void setServicesNameDiscount(String SND){ServicesNameDiscount=SND;}
+    public String getServicesNameDiscount(){return ServicesNameDiscount;}
+
+    public void setDiscount(int discoun){discount=discoun;}
+    public long getDiscount(){return discount;}
 
     protected long calcDiscout(long amount){
         return (long) (amount - ((discount/100.0)*amount));
     }
 
-    @Override
-    public void setAmount(long amount) {
-        super.setAmount(calcDiscout(amount));
-    }
 
-    @Override
-    public long getAmount() {
-        return super.getAmount();
-    }
-
-    @Override
-    public boolean checkDelivary() {
-        return super.checkDelivary();
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
-    }
 
 }
