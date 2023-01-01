@@ -1,6 +1,6 @@
 # Software_project
 
-                                                                     How to build the project
+                                                                How to build the project
 1) the project run on Eclipse IDE for Enterprise Java and Web Developers (2022-12)
 
 2) have application server tomcat installed in Eclipse IDE
