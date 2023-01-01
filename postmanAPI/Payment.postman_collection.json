@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "e7793285-3d15-4e82-ae85-7f2d4751b1f7",
+		"name": "Payment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25097377"
+	},
+	"item": [
+		{
+			"name": "SetCridetCardInfo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cardholder_name\":\"Mhmoaud Adel\",\r\n    \"card_number\":\"34261579863524\",\r\n    \"expiration_date\":\"12/4\",\r\n    \"cvv\":\"365\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/Payment/CCinformation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Payment",
+						"CCinformation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddFundsTOWallet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Payment/AddFundsTOWallet/75",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Payment",
+						"AddFundsTOWallet",
+						"75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SelectPaymentService",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Payment/PaymentService/2/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Payment",
+						"PaymentService",
+						"2",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\":130,\r\n    \"phoneNumber\":\"01026427763\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/Payment/pay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Payment",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetNameServicesList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Payment/getNameServicesList",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Payment",
+						"getNameServicesList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getNamesServiceProvider",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Payment/getNamesServiceProvider/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Payment",
+						"getNamesServiceProvider",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WayPayment",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Payment/WayPayment/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Payment",
+						"WayPayment",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

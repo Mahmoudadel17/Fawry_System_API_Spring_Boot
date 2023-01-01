@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "2b6e5af7-6ab0-4e24-872c-aa5d77e9f03f",
+		"name": "Transactions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25097377"
+	},
+	"item": [
+		{
+			"name": "walletTransactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Transaction/Search_wallet_transaction/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Transaction",
+						"Search_wallet_transaction",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refundTransactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Transaction/Search_refund_transaction/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Transaction",
+						"Search_refund_transaction",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaymentTransactionS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Transaction/Search_Payment_transaction/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Transaction",
+						"Search_Payment_transaction",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ShowAllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Transaction/ShowAllUsers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Transaction",
+						"ShowAllUsers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

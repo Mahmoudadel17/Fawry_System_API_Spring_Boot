@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "b41895cc-2f2d-4530-b42a-91a9ed36a128",
+		"name": "Refund",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25097377"
+	},
+	"item": [
+		{
+			"name": "MakeRefund",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Refund/MakeRefund/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Refund",
+						"MakeRefund",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUserRefundRequsets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Refund/UserRefundRequests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Refund",
+						"UserRefundRequests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllRefundRequsets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Refund/RefundRequests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Refund",
+						"RefundRequests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HandleRefunds",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Refund/HandleRefunds/1/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Refund",
+						"HandleRefunds",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserServicesPay",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Refund/GetAllServicesPay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Refund",
+						"GetAllServicesPay"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "c6619d2f-a025-4540-91e8-a2938d2cdc90",
+		"name": "Discount",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25097377"
+	},
+	"item": [
+		{
+			"name": "CheckDiscount",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/Discount/CheckDiscount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Discount",
+						"CheckDiscount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddOverallDiscount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Discount/AddOverallDiscount/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Discount",
+						"AddOverallDiscount",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddSpecificDiscount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/Discount/AddSpecificDiscount/15/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"Discount",
+						"AddSpecificDiscount",
+						"15",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
