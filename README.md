@@ -32,36 +32,40 @@
 In this project you will work on building something similar to Fawry system. This system should be user by users to pay for different services.
 The initial services are
 1) Mobile recharge services.
-i Vodafone
 
-ii Etisalat
+    i Vodafone
 
-iii. Orange
+    ii Etisalat
 
-iv. We
+    iii. Orange
+
+    iv. We
 
 2) Internet Payment services.
-i. Vodafone
 
-ii. Etisalat
+    i. Vodafone
 
-iii. Orange
+    ii. Etisalat
 
-iv. We
+    iii. Orange
+
+    iv. We
 
 3) Landline services
-i. Monthly receipt
 
-ii. Quarter receipt 
+    i. Monthly receipt
+
+    ii. Quarter receipt 
 
 4) Donations
-i. Cancer Hospital
 
-ii. Schools
+    i. Cancer Hospital
 
-iii. NGOs (Non profitable organizations)
+    ii. Schools
 
-                                                          Requirements User
+    iii. NGOs (Non profitable organizations)
+
+                               Requirements User
 1) The user should be able to sign-in to the system. Given the user’s email and a
 password, the user can login to the system and use any of the system functionalities.
 
@@ -89,7 +93,7 @@ funds to the wallet. Adding funds to the wallet should be done via credit card.
 7) The user should be able to check any discount for any service in the system. Discounts
 could be added by the admin (this will be discussed later).
 
-                                                                    Admin
+                                Admin
 1) The admin should be able to add any new service provider to the system. Provider
 consists of a form to be sent to the user and a handler for this form. So for example
 Vodafone Cash provider consists of a form (Mobile number, amount) and a handler for
@@ -99,25 +103,28 @@ text field and drop down field
 
 2) The admin should be able to add discounts to the system. There are two types of discounts.
 
-a. Overall discounts. For example the user should have 10% discount for the first
-transaction (regardless the service)
+    a. Overall discounts. For example the user should have 10% discount for the first
+    transaction (regardless the service)
 
-b. Specific discount.. For example the admin can apply 20% discount for all mobile
-recharge services.
+    b. Specific discount.. For example the admin can apply 20% discount for all mobile
+    recharge services.
 
 For any given service. All overall discounts and specific discounts for this service should
 apply.
 
 3) The admin should be able to list all user transactions. The transactions types are
-a. Payment transaction.
+    a. Payment transaction.
 
-b. Add to wallet transaction.
+    b. Add to wallet transaction.
 
-c. Refund transaction.
+    c. Refund transaction.
 
 4) The admin should be able to list all refund requests. Each refund request should contain the related service and the amount to be refunded.
 The admin should be able to accept or reject any refund request and if any refund request got accepted a refund transaction
 should be processed.
+
+
+
 
 
 
